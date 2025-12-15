@@ -38,7 +38,7 @@ def brute_force_password() -> dict:
     futures = []
     result = {}
 
-    with ProcessPoolExecutor(multiprocessing.cpu_count() - 1) as executor:
+    with ProcessPoolExecutor(max(1, multiprocessing.cpu_count() - 1)) as executor:
         for start in range(0, total, chunk_size):
             end = min(start + chunk_size - 1, total - 1)
             futures.append(
